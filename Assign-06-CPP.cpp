@@ -111,12 +111,12 @@ int main() {
                 // Asks the user if they want to find
                 // the average of the new list
                 std::cout
-                << "Would you like to find the average of these numbers?"
-                << "(y or n): ";
+                    << "Would you like to find the average of these numbers?"
+                    << "(y or n): ";
                 std::cin >> averageQuestionEven;
                 // set averageQuestionEven to all uppercase
                 std::transform(averageQuestionEven.begin(),
-                averageQuestionEven.end(),
+                               averageQuestionEven.end(),
                                averageQuestionEven.begin(), ::toupper);
                 // if they answer with "Y"
                 if (averageQuestionEven == "Y") {
@@ -124,7 +124,15 @@ int main() {
                     average = averageEven(evenIntegers);
                     // print the average
                     std::cout << "The average of all the numbers is "
-                    << std::setprecision(4) << average << "\n";
+                              << std::setprecision(4) << average << "\n";
+                } else if (averageQuestionOdd == "N") {
+                    // breaks out of loop
+                    break;
+                } else {
+                    // if they don't enter Y or N
+                    std::cout << "You must enter 'Y' or 'N'\n";
+                    // breaks out of loop
+                    break;
                 }
                 // break out of the loop
                 break;
@@ -141,12 +149,12 @@ int main() {
                 // Asks the user if they want to find
                 // the average of the new list
                 std::cout
-                << "Would you like to find the average of these numbers?"
-                << "(y or n): ";
+                    << "Would you like to find the average of these numbers?"
+                    << "(y or n): ";
                 std::cin >> averageQuestionOdd;
                 // set averageQuestionOdd to all uppercase
                 std::transform(averageQuestionOdd.begin(),
-                averageQuestionOdd.end(),
+                               averageQuestionOdd.end(),
                                averageQuestionOdd.begin(), ::toupper);
                 // if they answer with "Y"
                 if (averageQuestionOdd == "Y") {
@@ -154,7 +162,16 @@ int main() {
                     average = averageOdd(oddIntegers);
                     // print the average
                     std::cout << "The average of all the numbers is "
-                    << std::setprecision(4) << average << "\n";
+                              << std::setprecision(4) << average << "\n";
+                    // if they answer with "N"
+                } else if (averageQuestionOdd == "N") {
+                    // breaks out of loop
+                    break;
+                } else {
+                    // if they don't enter Y or N
+                    std::cout << "You must enter 'Y' or 'N'\n";
+                    // breaks out of loop
+                    break;
                 }
                 // break out of the loop
                 break;
@@ -164,10 +181,16 @@ int main() {
                 // break out of the loop
                 break;
             }
+            // checks if the user has a decimal in their number
+        }
+        if (userNumStr.find('.') != std::string::npos) {
+            std::cout << "You must You must enter a integer or 'STOP'\n";
+            // breaks out of the loop
+            break;
         }
         // Try catch to catch any invalid inputs
         try {
-            userNumInt = std::stod(userNumStr);
+            userNumInt = std::stoi(userNumStr);
             // add userNumInt to userNumList
             userNumList.push_back(userNumInt);
             // print that it was added
@@ -176,11 +199,11 @@ int main() {
         } catch (std::invalid_argument) {
             // If they entered a invalid input then display this
             std::cout
-                << "You must enter a number for both inputs."
+                << "You must enter a integer or 'STOP'."
                 << std::endl;
             // break out of the loop
             break;
         }
-    // while userNumStr does not equal "STOP"
+        // while userNumStr does not equal "STOP"
     } while (userNumStr != "STOP");
 }
