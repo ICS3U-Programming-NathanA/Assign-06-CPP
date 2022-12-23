@@ -1,141 +1,186 @@
 // Copyright (c) 2022 Nathan All rights reserved.
 //
 // Created by: Nathan
-// Date: Dec 8, 2022
-// This program calculates the surface area of a cylinder,
-// the circumference and area of the circles on the top and bottom
+// Date: Dec 21, 2022
+// This program finds the even numbers of a list it then displays it
 
 #include <algorithm>
+#include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <list>
 #include <string>
 
-// Function to calculate the area of the circles
+// function that finds the even numbers inside the list
 std::list<int> evenList(std::list<int> numList) {
-    // Declare area as a float
+    // Create a new list to store the even integers
     std::list<int> evenNumList;
-    // Area of a circle formula
+    // Iterate through the list of integers
     for (int counter : numList) {
         if (counter % 2 == 0) {
             evenNumList.push_back(counter);
         }
     }
-    // return area to main()
+    // return Return the list of even integers
     return evenNumList;
 }
 
-// Function to calculate the area of the circles
+// function that finds the odd numbers inside the list
 std::list<int> oddList(std::list<int> numList) {
-    // Declare area as a float
+    // Create a new list to store the odd integers
     std::list<int> oddNumList;
-    // Area of a circle formula
+    // for each loop to determine all the odd numbers
     for (int counter : numList) {
+        // if the number is odd then add it to a new list
         if (counter % 2 != 0) {
             oddNumList.push_back(counter);
         }
     }
-    // return area to main()
+    // return oddNumList
     return oddNumList;
 }
 
-// Function to calculate the surface area of the cylinder
-int averageEven(std::list<int> evenListNum) {
-    // delcare surfaceArea as a float
-    int sum = 0;
-    int average = 0;
-    // surfaceArea of a circle formula
+// Function for finding the average of even numbers
+float averageEven(std::list<int> evenListNum) {
+    // set sum to 0
+    float sum = 0;
+    // set average to 0
+    float average = 0;
+    // for each loop to calculate the sum of all the even numbers
     for (int counter : evenListNum) {
         sum = sum + counter;
     }
-    // fghfgh
+    // sum divided by the length to find the average
     average = sum / evenListNum.size();
-    // fgddfg
+    // return average
     return average;
 }
 
-// Function to calculate the surface area of the cylinder
-int averageOdd(std::list<int> oddListNum) {
-    // delcare surfaceArea as a float
-    int sum = 0;
-    // sadasd
-    int average = 0;
-    // surfaceArea of a circle formula
+// Function for finding the average of odd numbers
+float averageOdd(std::list<int> oddListNum) {
+    // set sum to 0
+    float sum = 0;
+    // set average to 0
+    float average = 0;
+    // for each loop to calculate the sum of all the odd numbers
     for (int counter : oddListNum) {
         sum = sum + counter;
     }
-    // asdasd
-    average = sum / sizeof(oddListNum);
-    // asdsad
+    // sum divided by the length to find the average
+    average = sum / oddListNum.size();
+    // return the average
     return average;
 }
 int main() {
-    // Declaring userRadius, userHeight, surfaceArea,
-    // circumference, area to floats
+    // set userNumList, evenIntegers, oddIntegers to an empty list
     std::list<int> userNumList, evenIntegers, oddIntegers;
-    // Declaring userRadiusStr, userHeightStr, playAgain, userUnits to strings
+    // Declare userNumStr, evenOrOdd, averageQuestionEven,
+    // averageQuestionOdd to strings
     std::string userNumStr, evenOrOdd, averageQuestionEven, averageQuestionOdd;
-
-    int userNumInt, average;
-    // Do while statement for the user to be able to restart the program
+    // Declare average as a float
+    float average;
+    // declare userNumInt as a int
+    int userNumInt;
+    // do while loop so the user can enter multiple integers
     do {
-        // Gets userRadiusStr from the user
+        // Ask the user to enter a list of integers
         std::cout << "Enter a integer or type stop: ";
         std::cin >> userNumStr;
+        // sets userNumStr to all uppercase
         std::transform(userNumStr.begin(), userNumStr.end(),
                        userNumStr.begin(), ::toupper);
-        // A try catch to to catch any invalid inputs
+        // if user_num_str is "STOP"
         if (userNumStr == "STOP") {
+            // Asks the user if they want to see the
+            // even integers, odd integers in the list
             std::cout << "Type e for even and type o for odd: ";
             std::cin >> evenOrOdd;
+            // sets evenOrOdd to all uppercase
             std::transform(evenOrOdd.begin(), evenOrOdd.end(),
                            evenOrOdd.begin(), ::toupper);
+            // if even_or_odd is "E"
             if (evenOrOdd == "E") {
+                // call even_list(user_num_list)
                 evenIntegers = evenList(userNumList);
+                // Print the even integers
                 std::cout << "The even integers are: ";
-                for (int num : evenIntegers) {
-                    std::cout << num << " ";
+                for (int counter : evenIntegers) {
+                    std::cout << counter << " ";
                 }
                 std::cout << std::endl;
-                std::cout << "Would you like to find the average of these numbers? (y or n): ";
+                // Asks the user if they want to find
+                // the average of the new list
+                std::cout
+                << "Would you like to find the average of these numbers?"
+                << "(y or n): ";
                 std::cin >> averageQuestionEven;
-                std::transform(averageQuestionEven.begin(), averageQuestionEven.end(),
+                // set averageQuestionEven to all uppercase
+                std::transform(averageQuestionEven.begin(),
+                averageQuestionEven.end(),
                                averageQuestionEven.begin(), ::toupper);
+                // if they answer with "Y"
                 if (averageQuestionEven == "Y") {
+                    // call average_even(even_integers)
                     average = averageEven(evenIntegers);
-                    std::cout << "The average of all the numbers is " << average << "\n";
+                    // print the average
+                    std::cout << "The average of all the numbers is "
+                    << std::setprecision(4) << average << "\n";
                 }
+                // break out of the loop
                 break;
+                // elif even_or_odd is "O"
             } else if (evenOrOdd == "O") {
+                // call odd_list(user_num_list)
                 oddIntegers = oddList(userNumList);
-                std::cout << "The even integers are: ";
-                for (int num : evenIntegers) {
-                    std::cout << num << " ";
+                // Print the odd integers
+                std::cout << "The odd integers are: ";
+                for (int counter : oddIntegers) {
+                    std::cout << counter << " ";
                 }
                 std::cout << std::endl;
-                std::cout << "Would you like to find the average of these numbers? (y or n): ";
+                // Asks the user if they want to find
+                // the average of the new list
+                std::cout
+                << "Would you like to find the average of these numbers?"
+                << "(y or n): ";
                 std::cin >> averageQuestionOdd;
-                std::transform(averageQuestionOdd.begin(), averageQuestionOdd.end(),
+                // set averageQuestionOdd to all uppercase
+                std::transform(averageQuestionOdd.begin(),
+                averageQuestionOdd.end(),
                                averageQuestionOdd.begin(), ::toupper);
+                // if they answer with "Y"
                 if (averageQuestionOdd == "Y") {
+                    // call average_even(odd_integers)
                     average = averageOdd(oddIntegers);
-                    std::cout << "The average of all the numbers is " << average << "\n";
+                    // print the average
+                    std::cout << "The average of all the numbers is "
+                    << std::setprecision(4) << average << "\n";
                 }
+                // break out of the loop
                 break;
             } else {
-                std::cout << "Enter either 'E', 'O' \n";
+                // You must enter either E or O
+                std::cout << "Enter either 'E' or 'O'\n";
+                // break out of the loop
                 break;
             }
         }
+        // Try catch to catch any invalid inputs
         try {
             userNumInt = std::stod(userNumStr);
+            // add userNumInt to userNumList
             userNumList.push_back(userNumInt);
+            // print that it was added
             std::cout
                 << "Added the integer to the list \n";
-
         } catch (std::invalid_argument) {
+            // If they entered a invalid input then display this
             std::cout
                 << "You must enter a number for both inputs."
                 << std::endl;
+            // break out of the loop
+            break;
         }
+    // while userNumStr does not equal "STOP"
     } while (userNumStr != "STOP");
 }
